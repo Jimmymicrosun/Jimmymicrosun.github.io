@@ -1,5 +1,5 @@
 # Site settings
-title: MY Blog
+title: GitHub 博客
 SEOTitle: 王夏天的博客 | ❤❤❤❤❤
 header-img: img/post-bg-desk.jpg
 email: wangxiatian@360-sh.com
@@ -11,7 +11,7 @@ github_repo: "https://github.com/qiubaiying/jimmymicrosun.github.io.git" # you c
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "winner!"
+sidebar-about-description: "第一个博客"
 sidebar-avatar: /img/5760CD28-0F53-4E5E-A4C3-731CB2A6DE2F.JPG      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
