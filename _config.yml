@@ -67,7 +67,7 @@ gitalk:
   repo: Jimmymicrosun.github.io    #仓库名称
   owner: jimmymicrosun    #github用户名
   admin: jimmymicrosun
-  id:''
+ 
   distractionFreeMode: true #是否启用类似FB的阴影遮罩
 
 
