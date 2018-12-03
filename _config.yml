@@ -67,7 +67,7 @@ gitalk:
   repo: jimmymicrosun.github.io    #仓库名称
   owner: jimmymicrosun    #github用户名
   admin: jimmymicrosun
-  id: 'window.location.pathname'
+  id: 'https://github.com/Jimmymicrosun/Jimmymicrosun.github.io/pulls'
   distractionFreeMode: true #是否启用类似FB的阴影遮罩
 
 
