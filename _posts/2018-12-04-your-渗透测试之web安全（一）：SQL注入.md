@@ -1,6 +1,4 @@
----
-published: false
----
+
 ---
 layout:     post
 title:      渗透测试之web安全（一）：SQL注入
