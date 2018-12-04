@@ -100,16 +100,16 @@ service-worker: true
 # Friends
 friends: [
     {
-        title: "WY",
-        href: "http://zhengwuyang.com"
+        title: "FreeBuf",
+        href: "https://www.freebuf.com"
     },{
-        title: "简书·BY",
-        href: "http://www.jianshu.com/u/e71990ada2fd"
+        title: "安全客",
+        href: "https://www.anquanke.com"
     },{
-        title: "Apple",
-        href: "https://apple.com"
+        title: "SecWiki",
+        href: "https://www.sec-wiki.com/news"
     },{
-        title: "Apple Developer",
-        href: "https://developer.apple.com/"
+        title: "360企业安全",
+        href: "https://b.360.cn/"
     }
 ]
