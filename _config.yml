@@ -64,7 +64,7 @@ gitalk:
   enable: true    #是否开启Gitalk评论
   clientID: 187b1ee1a5649f51bdf8                            #生成的clientID
   clientSecret: 04a357d34c31b152c0935a6a187297d2840b9bf7    #生成的clientSecret
-  repo: https://jimmymicrosun.github.io    #仓库名称
+  repo: jimmymicrosun.github.io    #仓库名称
   owner: jimmymicrosun    #github用户名
   admin: jimmymicrosun
  
