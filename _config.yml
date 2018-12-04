@@ -61,7 +61,7 @@ kramdown:
 
 # Gitalk
 gitalk:
-  enable: true    #是否开启Gitalk评论
+  enable: false    #是否开启Gitalk评论
   clientID: 553196fe961dc01fac25                            #生成的clientID
   clientSecret: b71e7d83e9e3c72e16d0d7e8f8484a430ea7787b    #生成的clientSecret
   repo: jimmymicrosun.github.io    #仓库名称
