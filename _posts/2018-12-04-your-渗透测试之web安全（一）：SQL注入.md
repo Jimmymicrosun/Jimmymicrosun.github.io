@@ -1,4 +1,3 @@
-
 ---
 layout:     post
 title:      渗透测试之web安全（一）：SQL注入
@@ -20,7 +19,7 @@ tags:
 
 ### 一、不同的注入点
 
-	（1）数字类型的注入
+1、数字类型的注入
 当输入参数为数字类型时，例如页码，ID等，存在注入时则为数字类型的注入。
 测试方法如下：
 http://www.xx.com/a.php?id=1
@@ -30,7 +29,7 @@ http://www.xx.com/a.php?id=1 and 1 =2              返回异常
 说明存在注入可能。
 这类注入方式常见于PHP和ASP等弱类型语言中，弱类型语言会自动推导数据类型，例，输入的ID的值为1时，会自动推导出ID的数据类型为int型，当输入的ID的值为1 and 1 = 2时，会自动推导出ID的数据类型为string型，但JAVA或者C#这类强类型语言并没有这样的特性，int型强制转换成string型时，会抛出异常，注入失败，所以这类注入方式常见于弱类型语言中。
 
-	（2）字符串类型的注入
+2、字符串类型的注入
 当输入参数为字符串类型时，则为字符串类型的输入，其与数字类型的注入的区别在于：注入时需要使用单引号来闭合。
 测试方法如下：
 http://www.xx.com/b.php?name=admin
@@ -38,13 +37,13 @@ http://www.xx.com/b.php?name=admin’and 1 = 1 --     返回正常
 其不同主要原因在于sql语句的差异，例，select *from user where name = ‘admin’ 则注入时需要单引号闭合，注入的数据应为admin’and 1 = 1 --，合并为sql则为select * from user where name = ‘admin’and 1 = 1 – ‘ 。
 	
 ### 二、不同的提交方式
-	（1）GET注入
+1、GET注入
 提交数据的方式是 GET ,注入点的位置在 GET 参数部分。比如有这样的一个链接http://xxx.com/news.php?id=1 , id 是注入点。
 
-	（2）POST注入
+2、POST注入
 使用 POST 方式提交数据，注入点位置在 POST 数据部分，常发生在表单中。
 
-	（3）COOKIE注入
+3、COOKIE注入
 要想深入了解Cookie注入的成因，必须要了解ASP脚本中的request对象。它被用来获取客户端提交的数据，其一般的使用方法是：request.[集合名称](参数名称)，但ASP中也可以省略集合名称，直接使用request(“参数名称”)，当使用这样的方法时，ASP规定是按QueryString、Form、Cookies、ServerVariables的顺序来获取数据的，当我们使用request("参数名称")方式获取客户端提交的数据，并且没有对使用request.cookies("参数名称")方式提交的数据进行过滤时，Cookie注入就产生了。
 测试方法如下：
 1.先判断注入点是否存在，例http://www.xx.com/a.asp?id=128去掉id后是否能正常访问，若无法正常访问则id参数在数据传输中起作用
@@ -53,43 +52,43 @@ http://www.xx.com/b.php?name=admin’and 1 = 1 --     返回正常
   URL: “javascript:alert(document.cookie="id="+escape("and1 = 2"));”
 判断是否有注入点方法与其余sql注入一致。
 
-	（4）HTTP注入
+4、HTTP注入
 X-Forwarded-For是HTTP头的一个字段。它被认为是客户端通过HTTP代理或者负载均衡器连接到web服务端获取源ip地址的一个标准。
 Useragent是记录软件程序的客户端信息的HTTP头字段，他可以用来统计目标和违规协议。在HTTP头中应该包含它，这个字段的第一个空格前面是软件的产品名称，后面有一个可选的斜杠和版本号。
 Referer是另外一个当应用程序没有过滤存储到数据库时，容易发生SQL注入的HTTP头。它是一个允许客户端指定的可选头部字段，通过它我们可以获取到提交请求URI的服务器情况。它允许服务器产生一系列的回退链接文档，像感兴趣的内容，日志等。它也允许跟踪那些坏链接以便维护。
 
 ### 三、不同获取信息的方式
-	（1）Boolean-based blind SQL injection（布尔型注入）
+1、Boolean-based blind SQL injection（布尔型注入）
 通过判断页面返回情况获得想要的信息。
 如下SQL注入：
 http://hello.com/view?id=1 and substring(version(),1,1)=5
 如果服务端MySQL版本是5.X的话，那么页面返回的内容就会跟正常请求一样。攻击者就可以通过这种方式获取到MySQL的各类信息。
 	
-	（2）Error-based SQL injection（报错型注入）
+2、Error-based SQL injection（报错型注入）
 如果页面能够输出SQL报错信息，则可以从报错信息中获得想要的信息。
 典型的就是利用group by的duplicate entry错误。关于这个错误，貌似是MySQL存在的 bug： duplicate key for entry on select?、 SQL Injection attack - What does this do?
 如下SQL注入：
 http://hello.com/view?id=1%20AND%20(SELECT%207506%20FROM(SELECT%20COUNT(*),CONCAT(0x717a707a71,(SELECT%20MID((IFNULL(CAST(schema_name%20AS%20CHAR),0x20)),1,54)%20FROM%20INFORMATION_SCHEMA.SCHEMATA%20LIMIT%202,1),0x7178786271,FLOOR(RAND(0)*2))x%20FROM%20INFORMATION_SCHEMA.CHARACTER_SETS%20GROUP%20BY%20x)a)
 在抛出的SQL错误中会包含这样的信息： Duplicate entry 'qzpzqttqxxbq1' for key 'group_key'，其中qzpzq和qxxbq分别是0x717a707a71和0x7178786271，用这两个字符串包住了tt（即数据库名），是为了方便sql注入程序从返回的错误内容中提取出信息。
 	
-	（3）UNION query SQL injection（可联合查询注入）
+3、UNION query SQL injection（可联合查询注入）
 最快捷的方法，通过UNION查询获取到所有想要的数据，前提是请求返回后能输出SQL执行后查询到的所有内容。
 如下SQL注入：
 http://hello.com/view?id=1 UNION ALL SELECT SCHEMA_NAME, DEFAULT_CHARACTER_SET_NAME FROM INFORMATION_SCHEMA.SCHEMATA
 	
-	（4）Stacked queries SQL injection（可多语句查询注入）
+4、Stacked queries SQL injection（可多语句查询注入）
 即能够执行多条查询语句，非常危险，因为这意味着能够对数据库直接做更新操作。
 如下SQL注入：
 http://hello.com/view?id=1;update t1 set content = 'aaaaaaaaa'
 在第二次请求 http://hello.com/view?id=1时，会发现所有的content都被设置为aaaaaaaaa了。
 	
-	（5）Time-based blind SQL injection（基于时间延迟注入）
+5、Time-based blind SQL injection（基于时间延迟注入）
 页面不会返回错误信息，不会输出UNION注入所查出来的泄露的信息。类似搜索这类请求，boolean注入也无能为力，因为搜索返回空也属于正常的，这时就得采用time-based的注入了，即判断请求响应的时间，但该类型注入获取信息的速度非常慢。
 如下SQL注入：
 http://hello.com/view?q=abc' AND (SELECT * FROM (SELECT(SLEEP(5)))VCVe) OR 1 = '
 该请求会使MySQL的查询睡眠5S，攻击者可以通过添加条件判断到SQL中，比如IF(substring(version(),1,1)=5, sleep(5), ‘t’) AS value就能做到类似boolean注入的效果，如果睡眠了5s，那么说明MySQL版本为5，否则不是，但这种方式获取信息的速度就会很慢了，因为要做非常多的判断，并且需要花时间等待，不断地去测试出相应的值出来。
 	
-	（6）Inline queries SQL injection（内联查询注入）
+6、Inline queries SQL injection（内联查询注入）
 内联注入是指向查询注入一些SQL代码后，原来的查询仍然会全部执行。
 例如某网站有修改密码的功能，用户必须输入旧密码并进行确认才能设置新密码。实现该功能的查询语句可能与下面的UPDATE语句类似：
 UPDATE users  
