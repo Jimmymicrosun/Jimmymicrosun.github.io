@@ -12,7 +12,7 @@ github_repo: "https://github.com/qiubaiying/jimmymicrosun.github.io.git" # you c
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "My first blog 👍"
-sidebar-avatar: /img/5760CD28-0F53-4E5E-A4C3-731CB2A6DE2F.JPG      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-avatar: /img/post-touxiang-huang.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
