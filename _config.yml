@@ -1,6 +1,6 @@
 # Site settings
 title: 分析 分享
-SEOTitle: 王夏天的个人主页 | ❤❤❤XD
+SEOTitle: j1mmy's homepage
 header-img: img/post-bg-desk.jpg
 email: 
 description: "Every failure is leading towards success."
@@ -57,7 +57,7 @@ kramdown:
 
 # 评论系统
 # Disqus（https://disqus.com/）
-# disqus_username: qiubaiying
+# disqus_username: xxx
 
 # Gitalk
 gitalk:
@@ -109,7 +109,5 @@ friends: [
         title: "SecWiki",
         href: "https://www.sec-wiki.com/news"
     },{
-        title: "360企业安全",
-        href: "https://b.360.cn/"
     }
 ]
